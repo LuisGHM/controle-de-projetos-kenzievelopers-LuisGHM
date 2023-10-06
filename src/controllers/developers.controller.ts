@@ -25,5 +25,11 @@ export const patchDevelopersController = async (req: Request, res: Response): Pr
     return res.status(200).json(developers);
 }
 
+export const deleteDevelopersController = async (req: Request, res: Response): Promise<Response> =>{
+    const {id} = req.params;
 
+    await deleteDevelopersService(+id);
+
+    return res.status(204).json();
+}
 
