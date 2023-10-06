@@ -3,7 +3,7 @@ import { CreateDevelopers, Developers, DevelopersResult } from "../interfaces/de
 import { client } from "../database";
 
 export const createDevelopersService = async (data: CreateDevelopers): Promise<Developers> => {
-    const queryFormat: string = format("INSERT INTO clients (%I) VALUES (%L) RETURNING *;", Object.keys(data), Object.values(data));
+    const queryFormat: string = format("INSERT INTO developers (%I) VALUES (%L) RETURNING *;", Object.keys(data), Object.values(data));
 
     const queryResult: DevelopersResult = await client.query(queryFormat);
 

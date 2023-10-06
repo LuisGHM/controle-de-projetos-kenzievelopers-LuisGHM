@@ -7,3 +7,9 @@ export const createDevelopersController = async (req: Request, res: Response): P
     
     return res.status(201).json(developers);
 }
+
+/* export const getDevelopersController = async (req: Request, res: Response): Promise<Response> => {
+    
+    
+    return res.status()
+}  */
