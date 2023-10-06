@@ -1,11 +1,10 @@
 import 'dotenv/config'
-import app from './app'
+import { app } from './app';
 import { startDatabase } from './database'
 
-const PORT = Number(process.env.PORT) || 3000
+const PORT = Number(process.env.PORT) || 3000;
 
 app.listen(PORT, async () => {
-    console.log("passou aqui");
     await startDatabase()
     console.log(`Server is running on port ${PORT}.`)
 })
