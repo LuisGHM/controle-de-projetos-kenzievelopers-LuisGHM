@@ -28,4 +28,9 @@ export const patchDevelopersService = async (id: number, data: DeveloperUpdate):
     return queryResult.rows[0];
 }
 
+export const deleteDevelopersService = async (id: number): Promise<void> => { 
+    const query: string = "DELETE FROM developers WHERE id = $1";
+
+    await client.query(query, [id]);
+}
 
