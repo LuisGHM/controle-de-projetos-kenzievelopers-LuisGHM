@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { Developers } from "../interfaces/developers.interface";
-import { createDevelopersService, deleteDevelopersService, getDevelopersInfoService, patchDevelopersService } from "../services/developers.service";
-import { DevelopersInfo } from "../interfaces/developersInfoPlusDevelopers.interface";
+import { createDevelopersService, deleteDevelopersService, getDevelopersInfoService, patchDevelopersService, postDevelopersInfoService } from "../services/developers.service";
+import { developersInfoPlusDevelopers } from "../interfaces/developersInfoPlusDevelopers.interface";
+import { developersInfo } from "../interfaces/developersInfo.interface";
 
 export const createDevelopersController = async (req: Request, res: Response): Promise<Response> => {
     const developers: Developers = await createDevelopersService(req.body);
@@ -12,9 +13,9 @@ export const createDevelopersController = async (req: Request, res: Response): P
 export const getDevelopersInfoController = async (req: Request, res: Response): Promise<Response> => {
     const {id} = req.params
     
-    const developersInfo: DevelopersInfo = await getDevelopersInfoService(+id);
+    const developersInfoPlusDevelopers: developersInfoPlusDevelopers = await getDevelopersInfoService(+id);
 
-    return res.status(200).json(developersInfo);
+    return res.status(200).json(developersInfoPlusDevelopers);
 }
 
 export const patchDevelopersController = async (req: Request, res: Response): Promise<Response> =>{
@@ -33,3 +34,10 @@ export const deleteDevelopersController = async (req: Request, res: Response): P
     return res.status(204).json();
 }
 
+export const postDevelopersInfoController = async (req: Request, res: Response): Promise<Response> =>{
+    const {id} = req.params;
+
+    const developersInfo: developersInfo = await postDevelopersInfoService(+id, req.body);
+
+    return res.status(201).json(developersInfo);
+}

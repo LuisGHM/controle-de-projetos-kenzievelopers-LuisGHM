@@ -1,6 +1,6 @@
 import { QueryResult } from "pg"
 
-export type DevelopersInfo = {
+export type developersInfoPlusDevelopers = {
     developerId: number,
     developerName: string,
     developerEmail: string,
@@ -8,4 +8,4 @@ export type DevelopersInfo = {
     developerInfoPreferredOS: string | null
 }
 
-export type DevelopersInfoResult = QueryResult<DevelopersInfo>
+export type DevelopersInfoPlusDevelopersResult = QueryResult<developersInfoPlusDevelopers>
