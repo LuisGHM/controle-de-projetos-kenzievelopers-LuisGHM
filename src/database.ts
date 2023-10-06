@@ -1,8 +1,10 @@
-import 'dotenv/config'
 import { Client, ClientConfig } from 'pg'
+import { promises } from 'graceful-fs';
 
 const databaseConfig = (): ClientConfig => {
     if (process.env.NODE_ENV === 'test') {
+        console.log("entrou");
+        
         return {
             user: process.env.DB_TEST_USER!,
             password: process.env.DB_TEST_PASSWORD!,
@@ -11,6 +13,7 @@ const databaseConfig = (): ClientConfig => {
             port: Number(process.env.DB_TEST_PORT!),
         }
     }
+    console.log("não entrou");
     return {
         user: process.env.DB_USER!,
         password: process.env.DB_PASSWORD!,
@@ -21,9 +24,10 @@ const databaseConfig = (): ClientConfig => {
 }
 const client: Client = new Client(databaseConfig())
 
-const startDatabase = async () => {
-    await client.connect();
-    console.log('Database connected.');
+const startDatabase = async (): Promise<void> => { 
+    console.log(databaseConfig());
+    await client.connect()
+    console.log('Database connected.')
 }
 
 export { client, startDatabase }
