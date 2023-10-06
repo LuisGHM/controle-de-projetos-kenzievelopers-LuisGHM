@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { createDevelopersController, getDevelopersInfoController } from "../controllers/developers.controller";
+import { createDevelopersController, deleteDevelopersController, getDevelopersInfoController, patchDevelopersController } from "../controllers/developers.controller";
 import { noRepeatEmailMiddleware } from "../middlewares/noRepeatEmail.middleware";
-import { existId } from "../middlewares/existId.middleware";
+import { existIdMiddleware } from "../middlewares/existId.middleware";
 
 export const developersRoute: Router = Router();
 
 developersRoute.post("/", noRepeatEmailMiddleware, createDevelopersController);
-developersRoute.get("/:id", existId, getDevelopersInfoController);
-developersRoute.patch("/:id");
-developersRoute.delete("/:id");
+developersRoute.get("/:id", existIdMiddleware, getDevelopersInfoController);
+developersRoute.patch("/:id", existIdMiddleware, noRepeatEmailMiddleware, patchDevelopersController);
+developersRoute.delete("/:id", existIdMiddleware, deleteDevelopersController);
 developersRoute.post("/id/infos");

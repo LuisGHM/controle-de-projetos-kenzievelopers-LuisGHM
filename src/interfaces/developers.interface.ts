@@ -8,4 +8,6 @@ export type Developers = {
 
 export type CreateDevelopers = Omit<Developers, "id">
 
+export type DeveloperUpdate = Partial<Developers>
+
 export type DevelopersResult = QueryResult<Developers>
