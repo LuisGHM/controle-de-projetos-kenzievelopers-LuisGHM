@@ -1,5 +1,5 @@
 import format from "pg-format";
-import { Projects, ProjectsCreate, ProjectsResult } from "../interfaces/projects.interfaces";
+import { Projects, ProjectsCreate, ProjectsResult, ProjectsUpdate } from "../interfaces/projects.interfaces";
 import { client } from "../database";
 
 export const createProjectService = async (data: ProjectsCreate): Promise<Projects> => {
@@ -10,7 +10,7 @@ export const createProjectService = async (data: ProjectsCreate): Promise<Projec
     return queryResult.rows[0];
 }
 
-export const getProjectsService = async(Id: number): Promise<Projects> => {
+export const getProjectsService = async(id: number): Promise<Projects> => {
     const query: string = `
     SELECT p.id "projectId", 
     p.name "projectName", 
@@ -22,7 +22,17 @@ export const getProjectsService = async(Id: number): Promise<Projects> => {
     FROM projects p 
     INNER JOIN developers d  ON d.id = p."developerId" WHERE p.id = $1;`;
 
-    const queryResult: ProjectsResult = await client.query(query, [Id]);
+    const queryResult: ProjectsResult = await client.query(query, [id]);
+
+    return queryResult.rows[0];
+}
+
+export const patchProjectsService = async (id: number, data: ProjectsUpdate): Promise<Projects> => {
+    const queryFormat: string = format("UPDATE projects SET (%I) = ROW (%L) WHERE id = $1 RETURNING *;", Object.keys(data), Object.values(data));
+
+    //console.log(queryFormat);
+    
+    const queryResult: ProjectsResult = await client.query(queryFormat, [id]);
 
     return queryResult.rows[0];
 }

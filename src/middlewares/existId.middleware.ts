@@ -8,6 +8,7 @@ export const existIdMiddleware = async (req: Request, res:Response, next: NextFu
 
     const query: string = "SELECT * FROM developers WHERE id = $1;";
     const queryResult:DevelopersResult = await client.query(query, [id]); 
+    
 
     if(!queryResult.rowCount){
         throw new AppError("Developer not found.", 404);
