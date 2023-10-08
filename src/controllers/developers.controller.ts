@@ -19,7 +19,7 @@ export const getDevelopersInfoController = async (req: Request, res: Response): 
 }
 
 export const patchDevelopersController = async (req: Request, res: Response): Promise<Response> =>{
-    const {id} = req.params;
+    const {id} = req.params;  
 
     const developers: Developers = await patchDevelopersService(+id, req.body);
 
@@ -28,7 +28,7 @@ export const patchDevelopersController = async (req: Request, res: Response): Pr
 
 export const deleteDevelopersController = async (req: Request, res: Response): Promise<Response> =>{
     const {id} = req.params;
-
+    
     await deleteDevelopersService(+id);
 
     return res.status(204).json();

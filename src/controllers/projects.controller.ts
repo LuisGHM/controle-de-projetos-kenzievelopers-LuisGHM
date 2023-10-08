@@ -15,11 +15,7 @@ export const getProjectsController = async (req: Request, res: Response): Promis
 }
 
 export const patchProjectsController = async (req: Request, res: Response): Promise<Response> => {
-    console.log("dentro " + req.params.id);
-
     const project: Projects = await patchProjectsService(+req.params.id, req.body);
-
-    console.log(project);
     
     return res.status(200).json(project);
 }

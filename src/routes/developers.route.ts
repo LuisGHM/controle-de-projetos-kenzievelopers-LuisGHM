@@ -11,4 +11,4 @@ developersRoute.post("/", noRepeatEmailMiddleware, createDevelopersController);
 developersRoute.get("/:id", existIdMiddleware, getDevelopersInfoController);
 developersRoute.patch("/:id", existIdMiddleware, noRepeatEmailMiddleware, patchDevelopersController);
 developersRoute.delete("/:id", existIdMiddleware, deleteDevelopersController);
-developersRoute.post("/:id/infos", existDevelopersMiddleware, preferredOSValidation, existIdMiddleware, postDevelopersInfoController);
+developersRoute.post("/:id/infos", existIdMiddleware, existDevelopersMiddleware, preferredOSValidation, postDevelopersInfoController);

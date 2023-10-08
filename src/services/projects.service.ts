@@ -29,8 +29,6 @@ export const getProjectsService = async(id: number): Promise<Projects> => {
 
 export const patchProjectsService = async (id: number, data: ProjectsUpdate): Promise<Projects> => {
     const queryFormat: string = format("UPDATE projects SET (%I) = ROW (%L) WHERE id = $1 RETURNING *;", Object.keys(data), Object.values(data));
-
-    //console.log(queryFormat);
     
     const queryResult: ProjectsResult = await client.query(queryFormat, [id]);
 
