@@ -10,8 +10,8 @@ export type Projects = {
     developerId: number | null
 }
 
-export type ProjectsCreate = Omit<Projects, "id">
+export type ProjectsCreate = Omit<Projects, "id">;
 
-export type ProjectsUpdate = Partial<Projects>
+export type ProjectsUpdate = Partial<Projects>;
 
-export type ProjectsResult = QueryResult<Projects>
+export type ProjectsResult = QueryResult<Projects>;
