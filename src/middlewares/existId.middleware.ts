@@ -11,9 +11,6 @@ export const existIdMiddleware = async (req: Request, res:Response, next: NextFu
     } else {
         id = req.body.developerId;
     }
-
-    console.log("saiu " + id);
-    
     
     const query: string = "SELECT * FROM developers WHERE id = $1;";
     const queryResult:DevelopersResult = await client.query(query, [id]); 
